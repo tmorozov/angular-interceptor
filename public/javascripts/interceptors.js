@@ -4,16 +4,15 @@ m2.config( function($httpProvider, $provide) {
 
     return {
       'request': function(config) {
-        config.url = config.url + '?token='+$rootScope.token
+        // config.url = config.url + '?token='+$rootScope.token
+        config.params = config.params || {};
+        config.params['token'] = $rootScope.token;
 console.log('config', config);
         return config;
       },
 
      'responseError': function(rejection) {
-console.log('rejection 2', rejection);
-
         var status = rejection.status;
-
         if (status == 401) {
           var deferred = $q.defer();
           var req = {
@@ -22,9 +21,7 @@ console.log('rejection 2', rejection);
           }
 
           $rootScope.requests401.push(req);
-
           $rootScope.$broadcast('event:tokenRequired');
-
           return deferred.promise;
         }
 
