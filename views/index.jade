@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  div#appNoInt
+    h1 No interceptor
+    div(ng-controller="ctrlButtons")
+      button(ng-click="loadResource()") Load Resource
+      h2 Resource:
+      p {{resource}}
+      p.error {{error}}
+
+      button(ng-click="getToken()") refresh Token
+      h2 token:
+      p {{token}}
+
+  div#appInt
+    h1 Interceptor
+    div(ng-controller="ctrlButtonsSimple")
+      button(ng-click="loadResource()") Load Resource
+      h2 Resource:
+      p {{resource}}
+      p.error {{error}}
+      h2 token:
+      p {{token}}
